@@ -193,7 +193,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
 
+  .hand-slot {
     .stack-count {
       position: absolute;
       bottom: -2px;

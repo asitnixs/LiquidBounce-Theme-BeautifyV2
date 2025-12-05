@@ -10,6 +10,13 @@
   },
   "values": [
     {
+      "type": "MULTI_CHOOSE",
+      "name": "Show",
+      "value": ["Header", "Name", "Score"],
+      "choices": ["Header", "Name", "Score"],
+      "canBeNone": false
+    },
+    {
       "type": "BOOLEAN",
       "name": "Numbers",
       "value": false

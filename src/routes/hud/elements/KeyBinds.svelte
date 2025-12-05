@@ -102,8 +102,11 @@
     spaceSeperatedNames.subscribe(updateModulesWithBinds);
     onMount(updateModulesWithBinds);
     listen("moduleToggle", updateModulesWithBinds);
-    listen("clickGuiValueChange", updateModulesWithBinds);
-
+    listen("valueChanged", async (event) => {
+        if (event?.value?.name === "Bind") {
+            await updateModulesWithBinds();
+        }
+    });
 </script>
 
 <div class="keybinds-panel" transition:fly={{ y: -10, duration: 250 }}>

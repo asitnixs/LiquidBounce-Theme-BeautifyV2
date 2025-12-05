@@ -15,13 +15,14 @@
     import Keystrokes from "./elements/keystrokes/Keystrokes.svelte";
     import Effects from "./elements/Effects.svelte";
     import BlockCounter from "./elements/BlockCounter.svelte";
-    import ArmorItems from "./elements/inventory/ArmorItems.svelte";
-    import InventoryContainer from "./elements/inventory/InventoryContainer.svelte";
     import Text from "./elements/Text.svelte";
-    import CraftingInput from "./elements/inventory/CraftingInput.svelte";
     import DraggableComponent from "./elements/DraggableComponent.svelte";
     import KeyBinds from "./elements/KeyBinds.svelte";
     import PlayerCoordinates from "./elements/PlayerCoordinates.svelte";
+    import ArmorItems from "./elements/inventory/ArmorItems.svelte";
+    import InventoryContainer from "./elements/inventory/InventoryContainer.svelte";
+    import CraftingInput from "./elements/inventory/CraftingInput.svelte";
+    import EnderChestInventory from "./elements/inventory/EnderChestInventory.svelte";
 
     let zoom = 100;
     let metadata: Metadata;
@@ -77,6 +78,8 @@
                     <InventoryContainer/>
                 {:else if c.name === "CraftingInventory"}
                     <CraftingInput/>
+                {:else if c.name === "EnderChestInventory"}
+                    <EnderChestInventory/>
                 {:else if c.name === "Taco"}
                     <Taco/>
                 {:else if c.name === "Keystrokes"}

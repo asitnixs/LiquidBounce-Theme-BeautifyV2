@@ -10,6 +10,17 @@
 
     export let settings: { [name: string]: any };
 
+    const cSettings = settings as HudScoreboardSettings & {
+        numbers?: boolean;
+        address?: string;
+    };
+
+    $: sections = cSettings?.show?.length ? cSettings.show : ["Header", "Name", "Score"];
+    $: showHeader = sections.includes("Header");
+    $: showName = sections.includes("Name");
+    $: canShowScore = sections.includes("Score");
+    $: showNumbers = canShowScore && (cSettings?.numbers ?? false);
+
     let scoreboard: Scoreboard | null = null;
 
     let accentColor = "dodgerblue";
@@ -34,7 +45,7 @@
 
 {#if scoreboard}
     <div class="scoreboard">
-        {#if scoreboard.header}
+        {#if scoreboard.header && showHeader}
             <div class="header">
                 <TextComponent fontSize={14} allowPreformatting={true} textComponent={scoreboard.header}/>
             </div>
@@ -42,16 +53,18 @@
         <div class="entries">
             {#each scoreboard.entries as {name, score}, i}
                 <div class="row">
-                    {#if i === scoreboard.entries.length - 1 && settings?.address}
+                    {#if i === scoreboard.entries.length - 1 && cSettings?.address}
                         <div class="custom-ip">
-                            {settings.address}
+                            {cSettings.address}
                         </div>
-                    {:else}
+                    {:else if showName}
                         <TextComponent fontSize={14} allowPreformatting={true} textComponent={name}/>
                     {/if}
-                    <div class:hidden={!settings?.numbers}>
-                        <TextComponent fontSize={14} allowPreformatting={true} textComponent={score}/>
-                    </div>
+                    {#if showNumbers}
+                        <div class="score-value">
+                            <TextComponent fontSize={14} allowPreformatting={true} textComponent={score}/>
+                        </div>
+                    {/if}
                 </div>
             {/each}
         </div>
@@ -94,9 +107,9 @@
     text-shadow: 0 0 8px rgba(var(--accent-color), 0.9);
   }
 
-  .hidden {
-    visibility: hidden;
-    opacity: 0;
+  .score-value {
+    min-width: 30px;
+    text-align: right;
   }
 
   .custom-ip {

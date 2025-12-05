@@ -256,9 +256,17 @@
 </script>
 
 <div class="clickgui-menu" style="position: absolute; left: {menuX}px; top: {menuY}px;">
-    <div class="top-panel" on:mousedown={onMouseDown} style="cursor: grab; user-select: none;" role="region">
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <div class="top-panel" on:mousedown={onMouseDown} style="cursor: grab; user-select: none;" role="region" aria-label="ClickGUI drag handle">
         <div class="window-controls">
-            <img class="lb-watermark" src={`img/lb-watermark.svg`} on:click={handleWatermarkClick} style="cursor: pointer;" />
+            <button
+                    type="button"
+                    class="lb-watermark-button"
+                    aria-label="Toggle easter egg"
+                    on:click={handleWatermarkClick}
+                    on:keydown={(event) => event.key === "Enter" && handleWatermarkClick()}>
+                <img class="lb-watermark" src={`img/lb-watermark.svg`} alt="LiquidBounce watermark logo" draggable="false" />
+            </button>
             {#if showEasterEgg}
                 <div class="easter-egg-img">
                     <img src={easterEggs[easterEggIndex].src} alt={easterEggs[easterEggIndex].alt} />
@@ -354,11 +362,22 @@
     .window-controls {
       display: flex;
       align-items: center;
+
+      .lb-watermark-button {
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
       .lb-watermark {
         width: 40px;
         height: 40px;
         user-select: none;
-        /* pointer-events: none; */
       }
     }
     .title-block {

@@ -67,7 +67,11 @@
     {#if effects.length > 0}
         {#each effects as e}
             <div class="effect">
-                <img class="effect-icon" src={"img/hud/effects/icon-" + e.effect.replace("minecraft:", "") + ".png"} />
+                <img
+                        class="effect-icon"
+                        src={"img/hud/effects/icon-" + e.effect.replace("minecraft:", "") + ".png"}
+                        alt={`${e.localizedName} icon`}
+                />
                 <div class="text">
                     <span class="name" style="color: {'#' + e.color.toString(16)}">
                         {e.localizedName}
