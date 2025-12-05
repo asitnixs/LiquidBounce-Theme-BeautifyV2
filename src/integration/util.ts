@@ -1,4 +1,4 @@
-import type { Module, GroupedModules } from "./types"
+import type {GroupedModules, Module} from "./types"
 
 export function groupByCategory(modules: Module[]): GroupedModules {
     return modules.reduce((acc: GroupedModules, current: Module) => {
@@ -39,10 +39,25 @@ export function intToRgba(value: number): number[] {
 
 export function hexToRgbString(hex: string): string {
     let c = hex.replace('#', '');
-    if (c.length === 3) c = c.split('').map(x => x + x).join('');
+    if (c.length === 3) {
+        c = c.split('').map(x => x + x).join('');
+    }
     const num = parseInt(c, 16);
     const r = (num >> 16) & 255;
     const g = (num >> 8) & 255;
     const b = num & 255;
     return `${r}, ${g}, ${b}`;
 }
+
+export const swap = (array: any[], i: number, j: number) => {
+    if (i < 0 || i >= array.length || j < 0 || j >= array.length) return;
+
+    const it = array[i];
+    array[i] = array[j];
+    array[j] = it;
+}
+
+export const getHashParams = (): URLSearchParams => {
+    const hash = window.location.hash.split('?')[1] || '';
+    return new URLSearchParams(hash);
+};

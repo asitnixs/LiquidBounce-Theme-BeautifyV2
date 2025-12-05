@@ -31,7 +31,9 @@
     </div>
     <div class="title">
         <span class="text">{title}</span>
-        <slot name="tag"/>
+        <span class="tag-slot">
+            <slot name="tag"/>
+        </span>
     </div>
     <div class="subtitle">
         <slot name="subtitle"/>
@@ -148,8 +150,11 @@
       transition: color .25s ease;
     }
 
-    slot[name="tag"] {
+    .tag-slot {
       margin-left: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
   }
 

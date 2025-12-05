@@ -26,7 +26,7 @@
     {#if loading}
         <CircleLoader/>
     {/if}
-    {title}
+    <span class="title-text">{title}</span>
 </button>
 
 <style lang="scss">
@@ -52,7 +52,7 @@
     gap: 10px;
     box-shadow: 0 0 10px rgba($accent-color, 0.5);
 
-    .title {
+    .title-text {
       position: relative;
       z-index: 2;
     }
